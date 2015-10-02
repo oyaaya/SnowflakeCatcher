@@ -1,8 +1,8 @@
  void setup(){
-  size(600,600);
+  size(600,800);
   background(0);
  }
- Flake[] snow= new Flake [1000];
+ Flake[] snow= new Flake [2000];
 
  class Dot{
    int x,y;
