@@ -1,8 +1,10 @@
+ 
  void setup(){
-  size(600,800);
+  size(800,800);
+  smooth();
   background(0);
  }
- Flake[] snow= new Flake [2000];
+ Flake[] snow= new Flake [800];
 
  class Dot{
    int x,y;
@@ -12,7 +14,7 @@
    }
    void show(){
      fill(0,0,255);
-     ellipse(x,y,15,15);
+     ellipse(x,y,5,5);
    }
  }
  int count=0;
@@ -21,7 +23,7 @@
    int x,y,size;
    Flake(){
      x=(int)(Math.random()*width);
-     y=5;
+     y=8;
      size=(int)(Math.random()*6+5);
    }
    void move(){
@@ -35,7 +37,19 @@
      ellipse(x,y,size,size);
    }  
  }
- 
+void mouseDragged(){
+  strokeWeight(10);
+  if(mouseButton==RIGHT)
+  {
+    stroke(0);
+  }
+  else
+  {
+    stroke(255,208,0);
+  }
+  line(mouseX,mouseY,pmouseX,pmouseY);
+  noStroke();
+}
  void draw(){
    background(0);
    if(count==snow.length-1){
@@ -52,5 +66,6 @@
      if(snow[i]!=null){
         snow[i].move();
      }
-   } 
- }
+   }
+}
+
