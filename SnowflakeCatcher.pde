@@ -5,7 +5,7 @@ int ounces = 0;
 void setup()
 {
   background(0);
-  size(600,400);
+  size(800,500);
 
   snow = new Snowflake[sNum];
   for (int i = 0; i < snow.length; i++) {
