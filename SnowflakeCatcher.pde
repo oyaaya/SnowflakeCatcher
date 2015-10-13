@@ -67,7 +67,7 @@
    if(mousePressed&& mouseButton==RIGHT){
        noFill();
        strokeWeight(1);
-       stroke(200,200,255);
+       stroke(120,64,255);
        ellipse(mouseX, mouseY, 20,20);
        for(int i=0; i<points.length; i++){
          if(points[i]!=null){
