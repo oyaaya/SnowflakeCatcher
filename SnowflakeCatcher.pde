@@ -54,8 +54,8 @@ class Snowflake
 
   Snowflake()
   {
-    x = (int)(Math.random()*600);
-    y = (int)(Math.random()*400);
+    x = (int)(Math.random()*800);
+    y = (int)(Math.random()*500);
     isMoving = true;
   }
   void show()
