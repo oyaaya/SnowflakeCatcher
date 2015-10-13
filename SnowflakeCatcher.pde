@@ -1,5 +1,5 @@
 Snowflake[] snow;
-int sNum = 200;
+int sNum = 500;
 int water =0;
 int ounces = 0;
 void setup()
