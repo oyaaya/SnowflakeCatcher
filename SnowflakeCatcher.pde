@@ -1,71 +1,102 @@
- 
- void setup(){
-  size(800,800);
-  smooth();
+Snowflake[] snow;
+int sNum = 200;
+int water =0;
+int ounces = 0;
+void setup()
+{
   background(0);
- }
- Flake[] snow= new Flake [800];
+  size(600,400);
 
- class Dot{
-   int x,y;
-   Dot(int x, int y){
-     this.x=x;
-     this.y=y;  
-   }
-   void show(){
-     fill(0,0,255);
-     ellipse(x,y,5,5);
-   }
- }
- int count=0;
- int dotNum=0;
- class Flake{
-   int x,y,size;
-   Flake(){
-     x=(int)(Math.random()*width);
-     y=8;
-     size=(int)(Math.random()*6+5);
-   }
-   void move(){
-     if(get(x,y+7)== color(0) && get(x+5,y+7)== color(0) && get(x-5, y+7)== color(0)){
-       y++;
-     }
-   }
-   void show(){
-     noStroke();
-     fill(255);
-     ellipse(x,y,size,size);
-   }  
- }
-void mouseDragged(){
-  strokeWeight(10);
-  if(mouseButton==RIGHT)
-  {
-    stroke(0);
+  snow = new Snowflake[sNum];
+  for (int i = 0; i < snow.length; i++) {
+    snow[i] = new Snowflake();
   }
-  else
-  {
-    stroke(255,208,0);
-  }
-  line(mouseX,mouseY,pmouseX,pmouseY);
-  noStroke();
 }
- void draw(){
-   background(0);
-   if(count==snow.length-1){
-     count=0;
-   }
-   snow[count]=new Flake();
-   count++;
-   for(int i=0; i<snow.length; i++){
-     if(snow[i]!=null){
-        snow[i].show();
-     }
-   } 
-   for(int i=0; i<snow.length; i++){
-     if(snow[i]!=null){
-        snow[i].move();
-     }
-   }
+void draw()
+{
+  background(0);
+  fill(100);
+  strokeWeight(3);
+  stroke(200);
+  quad(mouseX + 20, mouseY, mouseX - 20, mouseY, mouseX - 20, mouseY - 40, mouseX + 20, mouseY - 40);
+  noStroke();
+  fill(0,0,200);
+  quad(mouseX + 18, mouseY, mouseX - 17, mouseY, mouseX - 17, mouseY - water, mouseX + 18, mouseY - water);
+  fill(100);
+  stroke(200);
+  strokeWeight(3);
+  ellipse(mouseX, mouseY - 40, 40, 10);
+  for (int i = 0; i < snow.length; i++) {
+    snow[i].erase();
+    snow[i].lookDown();
+    snow[i].move();
+    snow[i].wrap();
+    snow[i].show();
+  }
+  noFill();
+    stroke(200);
+  strokeWeight(3);
+  ellipse(mouseX, mouseY - 40, 40, 10);
+
+}
+ void mousePressed() {
+  
+water = 0;
+  
+}
+
+
+class Snowflake
+{
+  
+  int x , y;
+  boolean isMoving;  
+
+  Snowflake()
+  {
+    x = (int)(Math.random()*600);
+    y = (int)(Math.random()*400);
+    isMoving = true;
+  }
+  void show()
+  {
+    if (isMoving == true){
+    noStroke();
+    fill(255);
+    ellipse(x, y, 5, 5);
+  }
+  }
+  void lookDown()
+  {
+    if (x > mouseX - 20 && mouseX + 20 > x && y == mouseY-3  || y > 400) {
+      isMoving = false;
+      x = 1000000;
+      if (water <40) {
+        water = water + 1;
+        ounces = ounces + 1;
+      }
+      
+    } else {
+      isMoving = true;
+    }
+  }
+  void erase()
+  {
+    fill(0);
+    ellipse(x, y, 7, 7);
+  }
+  void move()
+  {
+    if (isMoving == true){
+      y++;
+    }
+  }
+  void wrap()
+  {
+    if (y > 399) {
+      y = 0;
+      x = (int)(Math.random()*600);
+    }
+  }
 }
 
